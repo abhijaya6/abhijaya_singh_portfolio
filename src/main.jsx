@@ -1,5 +1,7 @@
 "use client";
+// 🔶 Keep ALL imports at the top — only once
 import React from "react";
+import { createRoot } from "react-dom/client"; // 🔶 moved up
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -25,7 +27,7 @@ const PROFILE = {
   phone: "+91-9604135196",
   linkedin: "https://www.linkedin.com/in/abhijaya6",
   github: "https://github.com/",
-  resumeUrl: "/Abhijaya_Singh_DataEngineer.pdf", // The updated file path
+  resumeUrl: "/Abhijaya_Singh_DataEngineer.pdf",
 };
 
 const KPIS = [
@@ -36,55 +38,30 @@ const KPIS = [
 ];
 
 const SKILLS = [
-  {
-    name: "Azure",
-    impact: [
+  { name: "Azure", impact: [
       "Designed ADLS + ADF orchestration with Key Vault & RBAC",
       "Cut storage cost ~20% via tiering & lifecycle rules",
-    ],
-    weight: 85,
-  },
-  {
-    name: "Databricks",
-    impact: [
+    ], weight: 85 },
+  { name: "Databricks", impact: [
       "Delta Lake pipelines; optimized shuffle & skew with AQE",
       "Deployed jobs with cluster policies & UC governance",
-    ],
-    weight: 88,
-  },
-  {
-    name: "PySpark",
-    impact: [
+    ], weight: 88 },
+  { name: "PySpark", impact: [
       "SCD2 MERGE, window functions, checkpointed streams",
       "Reduced job time 22→5 min using partitioning & cache",
-    ],
-    weight: 85,
-  },
-  {
-    name: "SQL",
-    impact: [
+    ], weight: 85 },
+  { name: "SQL", impact: [
       "Wrote 100+ analytical queries, CTEs, incremental loads",
       "Materialized views for faster BI; tuned with EXPLAIN",
-    ],
-    weight: 90,
-  },
-  {
-    name: "Airflow",
-    impact: ["DAGs for SLA tracking & retries", "Secrets via env/VAULT"],
-    weight: 70,
-  },
-  {
-    name: "Python",
-    impact: ["ETL utilities, validators, tests", "Typing + pydantic for safety"],
-    weight: 92,
-  },
+    ], weight: 90 },
+  { name: "Airflow", impact: ["DAGs for SLA tracking & retries", "Secrets via env/VAULT"], weight: 70 },
+  { name: "Python", impact: ["ETL utilities, validators, tests", "Typing + pydantic for safety"], weight: 92 },
 ];
 
 const PROJECTS = [
   {
     title: "Retail Data Lake Modernization (Big Retail Giant)",
-    problem:
-      "Legacy ETL on-prem causing long refresh cycles and high infra cost.",
+    problem: "Legacy ETL on-prem causing long refresh cycles and high infra cost.",
     approach:
       "Migrated to Azure (ADLS Gen2 + ADF) and Databricks Delta Lake; implemented bronze/silver/gold with CDC and SCD2 using MERGE; fine-grained access via UC.",
     impact:
@@ -135,19 +112,9 @@ const fade = {
 
 function Section({ id, title, children, subtitle }) {
   return (
-    <section
-      id={id}
-      className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16"
-    >
-      <motion.div
-        variants={fade}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-      >
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white/90">
-          {title}
-        </h2>
+    <section id={id} className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
+      <motion.div variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white/90">{title}</h2>
         {subtitle && <p className="text-white/60 mt-1">{subtitle}</p>}
         <div className="mt-6">{children}</div>
       </motion.div>
@@ -170,26 +137,13 @@ export default function DataPulsePortfolio() {
       {/* NAV */}
       <header className="sticky top-0 z-40 backdrop-blur border-b border-white/5 bg-[#0b0f14]/70">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-6 lg:px-8 h-14">
-          <a href="#" className="font-semibold tracking-wide">
-            {PROFILE.name}
-          </a>
+          <a href="#" className="font-semibold tracking-wide">{PROFILE.name}</a>
           <nav className="hidden md:flex items-center gap-6 text-sm text-white/80">
-            <a href="#skills" className="hover:text-white">
-              Skills
-            </a>
-            <a href="#projects" className="hover:text-white">
-              Projects
-            </a>
-            <a href="#experience" className="hover:text-white">
-              Experience
-            </a>
-            <a href="#contact" className="hover:text-white">
-              Contact
-            </a>
-            <a
-              href={PROFILE.resumeUrl}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/20"
-            >
+            <a href="#skills" className="hover:text-white">Skills</a>
+            <a href="#projects" className="hover:text-white">Projects</a>
+            <a href="#experience" className="hover:text-white">Experience</a>
+            <a href="#contact" className="hover:text-white">Contact</a>
+            <a href={PROFILE.resumeUrl} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/20">
               <Download size={16} /> Resume
             </a>
           </nav>
@@ -200,41 +154,26 @@ export default function DataPulsePortfolio() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(1000px_600px_at_50%_-20%,rgba(0,255,255,0.18),transparent_60%)]" />
         <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-          >
+          <div>
             <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
               <div className="flex-1">
                 <div className="inline-flex items-center gap-2 text-xs text-cyan-300/80 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-full">
                   <Database size={14} /> {PROFILE.headline}
                 </div>
-                <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">
-                  {PROFILE.name}
-                </h1>
+                <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">{PROFILE.name}</h1>
                 <p className="mt-3 text-white/70 text-lg">{PROFILE.summary}</p>
                 <div className="mt-6 grid sm:flex gap-3">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-white/90"
-                  >
+                  <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-white/90">
                     <Rocket size={18} /> Contact Me
                   </a>
-                  <a
-                    href={PROFILE.resumeUrl}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/15 hover:border-white/30"
-                  >
+                  <a href={PROFILE.resumeUrl} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/15 hover:border-white/30">
                     <Download size={18} /> Download Resume
                   </a>
                 </div>
                 {/* Recruiter TL;DR */}
                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {KPIS.map((k) => (
-                    <div
-                      key={k.label}
-                      className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
-                    >
+                    <div key={k.label} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
                       <div className="text-2xl font-semibold">{k.value}</div>
                       <div className="text-xs text-white/60">{k.caption}</div>
                     </div>
@@ -242,22 +181,15 @@ export default function DataPulsePortfolio() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* SKILLS */}
-      <Section
-        id="skills"
-        title="Skills with Proof"
-        subtitle="Visuals are cool; impact convinces. Each skill shows what it delivered."
-      >
+      <Section id="skills" title="Skills with Proof" subtitle="Visuals are cool; impact convinces. Each skill shows what it delivered.">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {SKILLS.map((s) => (
-            <div
-              key={s.name}
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:border-white/20"
-            >
+            <div key={s.name} className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:border-white/20">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">{s.name}</h3>
                 <div className="text-xs text-white/60">{s.weight}%</div>
@@ -266,9 +198,7 @@ export default function DataPulsePortfolio() {
                 <div className="h-full bg-white/80" style={{ width: `${s.weight}%` }} />
               </div>
               <ul className="mt-4 space-y-2 text-sm text-white/70 list-disc list-inside">
-                {s.impact.map((i, idx) => (
-                  <li key={idx}>{i}</li>
-                ))}
+                {s.impact.map((i, idx) => <li key={idx}>{i}</li>)}
               </ul>
             </div>
           ))}
@@ -285,20 +215,12 @@ export default function DataPulsePortfolio() {
               </div>
               <h3 className="text-xl font-semibold">{p.title}</h3>
               <div className="mt-3 grid gap-2 text-sm">
-                <div>
-                  <span className="text-white/60">Problem:</span> {p.problem}
-                </div>
-                <div>
-                  <span className="text-white/60">Approach:</span> {p.approach}
-                </div>
-                <div>
-                  <span className="text-white/60">Impact:</span> {p.impact}
-                </div>
+                <div><span className="text-white/60">Problem:</span> {p.problem}</div>
+                <div><span className="text-white/60">Approach:</span> {p.approach}</div>
+                <div><span className="text-white/60">Impact:</span> {p.impact}</div>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {p.tech.map((t) => (
-                  <Badge key={t}>{t}</Badge>
-                ))}
+                {p.tech.map((t) => <Badge key={t}>{t}</Badge>)}
               </div>
             </div>
           ))}
@@ -315,15 +237,11 @@ export default function DataPulsePortfolio() {
                 <div className="absolute left-2 top-2 size-4 rounded-full bg-white/80" />
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="text-lg font-semibold">
-                      {e.role} · {e.company}
-                    </h3>
+                    <h3 className="text-lg font-semibold">{e.role} · {e.company}</h3>
                     <span className="text-xs text-white/60">{e.period}</span>
                   </div>
                   <ul className="mt-3 space-y-2 text-sm text-white/80 list-disc list-inside">
-                    {e.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
+                    {e.bullets.map((b, i) => <li key={i}>{b}</li>)}
                   </ul>
                 </div>
               </div>
@@ -338,36 +256,21 @@ export default function DataPulsePortfolio() {
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
             <div className="text-sm text-white/70">Prefer email or LinkedIn</div>
             <div className="mt-4 flex flex-col gap-3 text-white/90">
-              <a
-                href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 hover:underline"
-              >
+              <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center gap-2 hover:underline">
                 <Mail size={18} /> {PROFILE.email}
               </a>
-              <a
-                href={`tel:${PROFILE.phone}`}
-                className="inline-flex items-center gap-2 hover:underline"
-              >
+              <a href={`tel:${PROFILE.phone}`} className="inline-flex items-center gap-2 hover:underline">
                 <Phone size={18} /> {PROFILE.phone}
               </a>
-              <a
-                href={PROFILE.linkedin}
-                className="inline-flex items-center gap-2 hover:underline"
-              >
+              <a href={PROFILE.linkedin} className="inline-flex items-center gap-2 hover:underline">
                 <Linkedin size={18} /> LinkedIn
               </a>
-              <a
-                href={PROFILE.github}
-                className="inline-flex items-center gap-2 hover:underline"
-              >
+              <a href={PROFILE.github} className="inline-flex items-center gap-2 hover:underline">
                 <Github size={18} /> GitHub
               </a>
             </div>
             <div className="mt-6">
-              <a
-                href={PROFILE.resumeUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/15 hover:border-white/30"
-              >
+              <a href={PROFILE.resumeUrl} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/15 hover:border-white/30">
                 <Download size={18} /> Download Resume
               </a>
             </div>
@@ -376,29 +279,13 @@ export default function DataPulsePortfolio() {
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
             <div className="text-sm text-white/70">Message</div>
             <form className="mt-3 grid gap-3" onSubmit={(e) => e.preventDefault()}>
-              <input
-                required
-                placeholder="Your name"
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none"
-              />
-              <input
-                required
-                type="email"
-                placeholder="Email"
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none"
-              />
-              <textarea
-                required
-                placeholder="How can I help?"
-                rows={4}
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none"
-              />
+              <input required placeholder="Your name" className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none" />
+              <input required type="email" placeholder="Email" className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none" />
+              <textarea required placeholder="How can I help?" rows={4} className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none" />
               <button className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-white/90">
                 Send <ArrowRight size={16} />
               </button>
-              <p className="text-xs text-white/50">
-                This is a static demo. Hook to Formspree / API on deploy.
-              </p>
+              <p className="text-xs text-white/50">This is a static demo. Hook to Formspree / API on deploy.</p>
             </form>
           </div>
         </div>
@@ -414,11 +301,8 @@ export default function DataPulsePortfolio() {
     </div>
   );
 }
-import React from "react";
-import { createRoot } from "react-dom/client";
 
-// Your file already has: export default function DataPulsePortfolio() { ... }
-
+// 🔶 Single render at the very end (no duplicate imports below)
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <DataPulsePortfolio />
