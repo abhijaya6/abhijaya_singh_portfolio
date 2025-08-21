@@ -81,7 +81,7 @@ const PROJECTS = [
 
 const EXPERIENCE = [
   {
-    company: "Senior Database & Data Engineer",
+    company: "Good Turn Analytics(Client: Supply Chain Expert)",
     role: "Senior Database & Data Engineer",
     period: "2025 – Present",
     bullets: [
@@ -93,13 +93,15 @@ const EXPERIENCE = [
     ],
   },
   {
-    company: "TCS (Client: Big Retail Giant)",
-    role: "Data Engineer",
-    period: "2019 – 2025",
-    bullets: [
-      "Engineered end-to-end ELT pipelines on Azure/Databricks with CI/CD, enabling the daily processing of over 1 billion rows of data for business intelligence platforms.",
-      "Optimized job performance by implementing partitioning and Z-Ordering, which reduced job runtimes by 75% (from 22 to 5 minutes).",
-      "Improved pipeline reliability and data integrity by establishing robust monitoring, automated retries, and idempotent upserts, reducing data-related incidents by 30%.",
+   company: "TCS (Client: Big Retail Giant)",
+  role: "Data Engineer",
+  period: "2019 – 2025",
+  bullets: [
+    "Designed and engineered end-to-end ELT pipelines on Azure Data Factory and Databricks, enabling seamless ingestion, transformation, and loading of large-scale retail data.",
+    "Implemented CI/CD workflows to automate deployments and version control, supporting daily processing of 1B+ rows of data for business intelligence and analytics platforms.",
+    "Optimized Spark job performance through partitioning, bucketing, and Z-Ordering, reducing runtime by 75% (from 22 minutes to 5 minutes).",
+    "Enhanced pipeline reliability by building monitoring dashboards, implementing automated retries, and ensuring idempotent upserts for data consistency.",
+    "Collaborated with data scientists, architects, and business teams to deliver scalable, high-quality data solutions that improved reporting accuracy and decision-making.",
     ],
   },
 ];
