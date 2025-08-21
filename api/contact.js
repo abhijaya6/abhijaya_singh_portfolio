@@ -1,34 +1,42 @@
-// /api/contact.js   (Node serverless function for Vercel + Vite)
+// /api/contact.js  (CommonJS for Vercel)
 const { Resend } = require("resend");
 
 module.exports = async (req, res) => {
+  // Only allow POST
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    res.statusCode = 405;
+    return res.end(JSON.stringify({ error: "Method not allowed" }));
+  }
+
+  // Parse JSON body (Vercel Node doesn't auto-parse)
+  let raw = "";
+  for await (const chunk of req) raw += chunk;
+  const { name, email, message, website } = JSON.parse(raw || "{}");
+
+  // Honeypot (optional)
+  if (website) return res.end(JSON.stringify({ ok: true }));
+
+  if (!name || !email || !message) {
+    res.statusCode = 400;
+    return res.end(JSON.stringify({ error: "Missing fields" }));
   }
 
   try {
-    const { name, email, message, website } = req.body || {};
-
-    // Honeypot: bots fill this hidden field
-    if (website) return res.status(200).json({ ok: true });
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: "Missing fields" });
-    }
-
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
-      // For fastest testing use Resend's sandbox sender:
+      // use sandbox sender for quickest test; change to your verified domain later
       from: "Portfolio <onboarding@resend.dev>",
-      to: process.env.CONTACT_TO,       // <-- your Gmail from the env var
+      to: process.env.CONTACT_TO,         // your Gmail from env var
       reply_to: email,
       subject: `New message from ${name}`,
       text: `From: ${name} <${email}>\n\n${message}`,
     });
 
-    return res.status(200).json({ ok: true });
+    res.statusCode = 200;
+    return res.end(JSON.stringify({ ok: true }));
   } catch (e) {
-    return res.status(500).json({ error: e.message || "Server error" });
+    res.statusCode = 500;
+    return res.end(JSON.stringify({ error: e.message || "Server error" }));
   }
 };
