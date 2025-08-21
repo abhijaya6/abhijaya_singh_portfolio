@@ -23,17 +23,17 @@ const PROFILE = {
   summary:
     "Data Engineer with 4+ years of experience designing and optimizing scalable data pipelines on Azure and Databricks. Proven track record of improving data processing efficiency and reducing infrastructure costs. Skilled in PySpark, SQL, and Delta Lake with a focus on cost/performance optimization and a background in the retail and supply chain domains.",
   location: "India (Open to Remote/Hybrid)",
-  email: "abhijaya@email.com",
+  email: "abhijayasingh6@email.com",
   phone: "+91-9604135196",
   linkedin: "https://www.linkedin.com/in/abhijaya6",
-  github: "https://github.com/",
+  github: "https://github.com/abhijaya6",
   resumeUrl: "/Abhijaya_Singh_DataEngineer.pdf",
 };
 
 const KPIS = [
   { label: "Years", value: 4, caption: "Experience" },
   { label: "Pipelines", value: 60, caption: "Built & Prod" },
-  { label: "TB+, Rows", value: "3+ TB · 1B+", caption: "Processed" },
+  { label: "TB+, Rows", value: "3TB+ · 1B+", caption: "Processed" },
   { label: "Domains", value: 2, caption: "Retail, Supply Chain" },
 ];
 
