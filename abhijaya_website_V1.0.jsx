@@ -25,7 +25,7 @@ const PROFILE = {
   phone: "+91-9604135196",
   linkedin: "https://www.linkedin.com/in/abhijaya6",
   github: "https://github.com/",
-  resumeUrl: "/Abhijaya_Singh_Resume.pdf", // replace on deploy
+  resumeUrl: "/Abhijaya_Singh_DataEngineer.pdf", // The updated file path
 };
 
 const KPIS = [
@@ -241,8 +241,6 @@ export default function DataPulsePortfolio() {
                   ))}
                 </div>
               </div>
-
-              {/* Removed "Career Pulse" Chart */}
             </div>
           </motion.div>
         </div>
@@ -275,8 +273,6 @@ export default function DataPulsePortfolio() {
             </div>
           ))}
         </div>
-
-        {/* Removed "Stack Usage" Chart */}
       </Section>
 
       {/* PROJECTS */}
