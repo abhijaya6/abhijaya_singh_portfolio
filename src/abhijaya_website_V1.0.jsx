@@ -414,3 +414,13 @@ export default function DataPulsePortfolio() {
     </div>
   );
 }
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+// Your file already has: export default function DataPulsePortfolio() { ... }
+
+createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <DataPulsePortfolio />
+  </React.StrictMode>
+);
