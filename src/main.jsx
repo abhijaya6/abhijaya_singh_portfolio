@@ -134,6 +134,31 @@ function Badge({ children }) {
 
 // -- PAGE -----------------------------------------------------------------------
 export default function DataPulsePortfolio() {
+  // 🟨 added status state for UX feedback
+  const [status, setStatus] = React.useState("");
+
+  // 🟨 added submit handler that posts to /api/contact
+  async function handleContactSubmit(e) {
+    e.preventDefault();
+    setStatus("Sending...");
+    const fd = new FormData(e.currentTarget);
+    const body = Object.fromEntries(fd.entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(out.error || "Failed to send");
+      setStatus("Sent! ✅");
+      e.currentTarget.reset();
+    } catch (err) {
+      setStatus(`Error: ${err.message} ❌`);
+    }
+  }
+
   return (
     <div className="min-h-screen w-full text-white bg-[#0b0f14] selection:bg-cyan-500/30">
       {/* NAV */}
@@ -280,14 +305,34 @@ export default function DataPulsePortfolio() {
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
             <div className="text-sm text-white/70">Message</div>
-            <form className="mt-3 grid gap-3" onSubmit={(e) => e.preventDefault()}>
-              <input required placeholder="Your name" className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none" />
-              <input required type="email" placeholder="Email" className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none" />
-              <textarea required placeholder="How can I help?" rows={4} className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none" />
-              <button className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-white/90">
+            {/* 🟨 wired the form to the API; added name attributes; show status */}
+            <form className="mt-3 grid gap-3" onSubmit={handleContactSubmit}>
+              <input
+                name="name"                         // 🟨
+                required
+                placeholder="Your name"
+                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none"
+              />
+              <input
+                name="email"                        // 🟨
+                required
+                type="email"
+                placeholder="Email"
+                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none"
+              />
+              <textarea
+                name="message"                      // 🟨
+                required
+                placeholder="How can I help?"
+                rows={4}
+                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none"
+              />
+              {/* 🟨 optional honeypot to reduce spam */}
+              <input name="website" className="hidden" tabIndex="-1" autoComplete="off" />
+              <button type="submit" className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-white/90">
                 Send <ArrowRight size={16} />
               </button>
-              <p className="text-xs text-white/50">This is a static demo. Hook to Formspree / API on deploy.</p>
+              <p className="text-xs text-white/60">{status || "I’ll reply within a day."}</p> {/* 🟨 */}
             </form>
           </div>
         </div>
